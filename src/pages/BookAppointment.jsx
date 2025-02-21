@@ -104,7 +104,7 @@ const BookAppointment = () => {
       notes: userDetails.notes,
       address: userDetails.address,
       service: userDetails.service || service.name,
-      status: "pending",
+      status: "Pending",
     //   date: date.toISOString(),
       slot: `${selectedSlot} ${date.toDateString()}`,
     };
