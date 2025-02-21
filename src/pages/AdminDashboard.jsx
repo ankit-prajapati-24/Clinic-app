@@ -2,57 +2,71 @@ import React, { useState, useEffect } from "react";
 import { apiConnecter } from "../services/apiconnecter";
 import ContactMessages from "../components/ContactMessages";
 import LoadingPage from "../components/LoadingPage";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+ const navigate = useNavigate();
   // Fetch transactions from the API
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      try {
-        const response = await apiConnecter('GET',`admin/transactions/all`);
-        console.log(response);
-        // alert(response);
-        if (!response.status) {
-          throw new Error("Failed to fetch transactions");
-        }
-        setTransactions(response.data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+  
+  const fetchTransactions = async () => {
+    try {
+      const response = await apiConnecter('GET',`admin/transactions/all`);
+      console.log(response);
+      // alert(response);
+      if (!response.status) {
+        throw new Error("Failed to fetch transactions");
       }
-    };
+      setTransactions(response.data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchTransactions();
   }, []);
 
   // Function to update transaction status
   const updateStatus = async (id, newStatus) => {
+
     try {
 
 // https://clinic-639l.onrender.com/admin/transaction-update/{transactionId}/{status}
 
 
       const response = await apiConnecter('PUT',`admin/transaction-update/${id}/${newStatus}`);
-      console.log(response);
-      if (!response.ok) {
-        throw new Error("Failed to update status");
-      }
+      toast.success("Successfully updated transaction status");
+      // console.log(response);
+      // if (!response.ok) {
+      //   throw new Error("Failed to update status");
+      // }
 
       // Update the local state to reflect the change
+      const location = window.location.pathname;
+      navigate("/admin-dashboard");
+       fetchTransactions();
       setTransactions((prevTransactions) =>
         prevTransactions.map((transaction) =>
           transaction.id === id ? { ...transaction, status: newStatus } : transaction
         )
       );
     } catch (err) {
+      toast.error("Unable to change status of transaction");
       setError(err.message);
     }
   };
 
+
+  useEffect(() => {
+  
+  }, [transactions])
+  
   // if (loading) {
   //   return <div className="p-6 text-center min-h-screen">Loading...</div>;
   // }
@@ -126,7 +140,7 @@ const AdminDashboard = () => {
                   {transaction.status}
                 </td>
               {
-                transaction.status == "Pending" &&   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 
                 <select
                   value={transaction.status}
@@ -134,7 +148,7 @@ const AdminDashboard = () => {
                   className="p-2 border rounded"
                 >
                   <option value="Pending">Pending</option>
-                  <option value="Completed">Completed</option>
+                  <option value="Accepted">Accepted</option>
                   <option value="Cancelled">Cancelled</option>
                 </select>
               </td> 
