@@ -20,7 +20,7 @@ function NavBar() {
   function handleLogout(){
     dispatch(setToken(null));
     dispatch(setRole(null));
-    alert("Logout ");
+    // alert("Logout ");
     navigate("/login");
   }
   // Close dropdown if clicked outside

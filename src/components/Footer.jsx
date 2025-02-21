@@ -1,5 +1,6 @@
 import React from "react";
 import clinicImage from "../assets/clinic-img.avif";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -10,12 +11,14 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <img src={clinicImage} alt="Clinic" className="w-48 h-48 mx-auto md:mx-0 rounded-md mb-4" />
             <h3 className="text-xl font-bold mb-2">Our Clinic</h3>
-            <p className="text-gray-300">123 Health Street, Wellness City, WC 12345</p>
-            <p className="text-gray-300 mt-2">
-              <span className="font-semibold">Phone:</span> +1 (123) 456-7890
+            <p className="text-gray-300">
+              <span className="font-semibold">Address:</span> H.No: 2-4-639/C/102, Sunder Nagar, Kachiguda, Hyderabad, Telangana 500027
             </p>
             <p className="text-gray-300 mt-2">
-              <span className="font-semibold">Email:</span> info@yourclinic.com
+              <span className="font-semibold">Phone:</span> 9676688021
+            </p>
+            <p className="text-gray-300 mt-2">
+              <span className="font-semibold">Email:</span> <a href="mailto:Drsamee11@gmail.com" className="underline">Drsamee11@gmail.com</a>
             </p>
           </div>
 
@@ -23,10 +26,10 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="#home" className="text-gray-300 hover:text-white transition">Home</a></li>
-              <li><a href="#services" className="text-gray-300 hover:text-white transition">Services</a></li>
-              <li><a href="#about" className="text-gray-300 hover:text-white transition">About Us</a></li>
-              <li><a href="#contact" className="text-gray-300 hover:text-white transition">Contact</a></li>
+              <li><Link to="/" className="text-gray-300 hover:text-white transition">Home</Link></li>
+              <li><Link to="/services" className="text-gray-300 hover:text-white transition">Services</Link></li>
+              <li><Link to="/about" className="text-gray-300 hover:text-white transition">About Us</Link></li>
+              <li><Link to="/ContactUs" className="text-gray-300 hover:text-white transition">Contact</Link></li>
             </ul>
           </div>
 
