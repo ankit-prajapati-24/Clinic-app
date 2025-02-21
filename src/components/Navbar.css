@@ -1,0 +1,175 @@
+/* Navbar */
+.navbar {
+    background-color: #179ee7;  /* Grayish-green background */
+    height: 80px;
+    display: flex;
+    width: 100wh;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  
+  /* Navbar Container */
+  .nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    max-width: 1500px;
+    position: relative;
+  }
+  
+  /* Logo Style */
+  .nav-logo {
+    color: white; /* sky color for the logo text */
+    align-items: center;
+    margin-left: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+  }
+  
+  /* Icon next to the logo */
+  .nav-logo .icon {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    margin-left: 16px;
+  }
+  
+  /* Navbar Menu */
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    text-align: center;
+    margin-right: 2rem;
+  }
+  
+  /* Navbar Links */
+  .nav-links {
+    color: #fff; /* White color for text */
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    height: 100%;
+    border-bottom: 3px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  /* Hover effect on nav items */
+  .nav-item {
+    line-height: 40px;
+    margin-right: 1rem;
+  }
+  
+  .nav-item:after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 0;
+    background: transparent;
+    transition: width 0.7s ease, background-color 0.5s ease;
+  }
+  
+  .nav-item:hover:after {
+    width: 100%;
+    background: #ffdd40;  /* Golden color for hover underline */
+  }
+  
+  /* Active nav item */
+  .nav-item .active {
+    color: #ffdd40; /* Golden color */
+    border: 1px solid #ffdd40;
+    border-radius: 15%;
+  }
+  
+  /* Icon style for mobile */
+  .nav-icon {
+    display: none;
+    color: #ffdd40; /* Golden color for icons */
+  }
+  
+  .nav-icon .icon {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  /* Mobile menu style */
+  @media screen and (max-width: 960px) {
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      border-top: 1px solid #fff; /* White border */
+      position: absolute;
+      backdrop-filter: blur(10px);
+      background-color: rgba(26, 119, 177, 0.516);
+      /* background-color: transparent; */
+      /* filter:blur(1px); */
+      top: 80px;
+      /* color: #000; */
+      left: -110%;
+      opacity: 1;
+      transition: all 0.5s ease;
+    }
+  
+    .nav-menu.active {
+      
+      left: 0px;
+      opacity: 1;
+      transition: all 0.5s ease;
+      z-index: 1;
+    }
+  
+    .nav-item .active {
+      color: #179ee7;
+      border: none;
+    }
+  
+    .nav-links {
+      padding: 1.5rem;
+      width: 100%;
+      display: table;
+    }
+  
+    /* Logo icon in mobile view */
+    .nav-logo .icon {
+      width: 2rem;
+      height: 2rem;
+    }
+  
+    /* Mobile hamburger menu icon */
+    .nav-icon {
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translate(-100%, -50%);
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+      color: #ffdd40; /* Golden color */
+    }
+    .nav-links {
+      color: #1B1F3B ; /* White color for text */
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      width: 150px;
+      /* border-radius: 15px; */
+      margin: 0 auto;
+      height: 100%;
+      border-bottom:1px solid transparent;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    
+  }
+  
