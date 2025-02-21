@@ -68,7 +68,7 @@ const BookAppointment = () => {
       const response = await axios.get(`https://clinic-639l.onrender.com/availability/${newDate.toISOString()}`);
       setAvailability(response.data.slots);
     } catch (err) {
-      setError("Failed to fetch availability. Please try again.");
+      // setError("Failed to fetch availability. Please try again.");
       setAvailability(defaultSlots);
     }
   };
@@ -85,6 +85,17 @@ const BookAppointment = () => {
 
   const handleTransactionChange = (e) => {
     setTransactionId(e.target.value);
+    const value = e.target.value;
+     // Validation Logic
+  if (!value) {
+    setError("Transaction ID is required");
+  } else if (value.length < 8) {
+    setError("Transaction ID must be at least 8 characters");
+  } else if (!/^[a-zA-Z0-9]+$/.test(value)) {
+    setError("Transaction ID must be alphanumeric");
+  } else {
+    setError(""); // No errors
+  }
   };
 
   const handleBookingSubmit = async () => {
@@ -148,7 +159,12 @@ const BookAppointment = () => {
        <h2 className="text-xl font-semibold text-gray-800 mb-4">Select a Date and Time</h2>
         <p className="text-gray-600 mb-4">India Standard Time (IST)</p>
 
-        <Calendar onChange={handleDateChange} value={date} />
+           <Calendar 
+        onChange={handleDateChange} 
+        value={date} 
+        minDate={new Date()} // Restricts past dates
+        tileDisabled={({ date }) => date.getDay() === 0 || date.getDay() === 6} // Disables Saturdays & Sundays  
+      />
        </div>
 
         <div className="mt-6 ml-6">
@@ -183,17 +199,20 @@ const BookAppointment = () => {
       )}
 
       {selectedSlot && (
-        <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold text-gray-800">Enter Transaction ID</h3>
-          <input
-            type="text"
-            placeholder="Transaction ID"
-            value={transactionId}
-            onChange={handleTransactionChange}
-            className="w-full p-2 border rounded-lg mt-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-      )}
+      <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
+        <h3 className="text-lg font-semibold text-gray-800">Enter Transaction ID</h3>
+        <input
+          type="text"
+          placeholder="Transaction ID"
+          value={transactionId}
+          onChange={handleTransactionChange}
+          className={`w-full p-2 border rounded-lg mt-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+            ${error ? "border-red-500" : "border-gray-300"}`}
+        />
+        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      </div>
+    )}
+
 
       <PatientDetailsForm
         userDetails={userDetails}
