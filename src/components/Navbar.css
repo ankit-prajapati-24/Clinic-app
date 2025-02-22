@@ -1,5 +1,6 @@
 /* Navbar */
 .navbar {
+  
     background-color: #179ee7;  /* Grayish-green background */
     height: 80px;
     display: flex;
@@ -14,6 +15,7 @@
   
   /* Navbar Container */
   .nav-container {
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,6 +49,7 @@
   
   /* Navbar Menu */
   .nav-menu {
+    
     display: flex;
     list-style: none;
     text-align: center;

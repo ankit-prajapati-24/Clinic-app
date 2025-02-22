@@ -42,7 +42,7 @@ function NavBar() {
 
   return (
     <>
-      <nav className="navbar ">
+      <nav className="navbar">
         <div className="nav-container">
           <NavLink exact to="/" className="nav-logo">
             <img
@@ -115,7 +115,7 @@ function NavBar() {
                 {/* User Dropdown */}
                 <div className="relative" ref={userMenuRef}>
                   <div
-                    className="cursor-pointer rounded-full   text-white"
+                    className="cursor-pointer rounded-full text-white  mx-auto  flex items-center  justify-center"
                     onClick={toggleDropdown}
                   >
                     {/* { (token && token.substr(0,2))|| "An"} */}
