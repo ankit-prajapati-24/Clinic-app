@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import namsastemodel from '../assets/contact-model.png';
+import namsastemodel from '../assets/_BEC9A60C-FA0E-4BED-A596-50CC631B1566_-removebg-preview.png';
 import { apiConnecter } from '../services/apiconnecter';
 import { setSignData } from '../slices/UserDataSlice';
 
