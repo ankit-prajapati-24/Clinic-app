@@ -64,6 +64,16 @@ function Signup() {
 
           {/* Email Input */}
           <label className="block mb-4">
+            <span className="text-gray-700">Name</span>
+            <input
+              type="Name"
+              {...register('Name', { required: 'Name is required' })}
+              placeholder="Enter Your Name"
+              className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500"
+            />
+            {errors.Email && <p className="text-red-500 text-sm">{errors.Email.message}</p>}
+          </label>
+          <label className="block mb-4">
             <span className="text-gray-700">Email Address</span>
             <input
               type="email"

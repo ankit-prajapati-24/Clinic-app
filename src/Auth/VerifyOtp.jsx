@@ -13,7 +13,7 @@ const VerifyOtp = () => {
   const navigate = useNavigate();
 
   const userform = useSelector((state) => state.User.SignData);
-  const { Password, Email } = userform;
+  const { Password, Email,Name } = userform;
 
   const handleVerifyAndSignup = async (event) => {
     event.preventDefault();
@@ -28,10 +28,9 @@ const VerifyOtp = () => {
         ref.current.continuousStart(); // Start the loading animation
       }
       const res = await apiConnecter("POST", "user/verify-otp",{
-        "name":"",
+        "name":Name,
         "gmail": Email,
         "password": Password,
-        "name": null,
         "mobile": null,
         "history": [],
         "services": [],
@@ -55,10 +54,11 @@ const VerifyOtp = () => {
     }
   };
 
+
   const handleResendOtp = async () => {
     setIsLoading(true);
     try {
-      await apiConnecter("POST", "Auth/ResendOtp", { Email });
+      await apiConnecter("POST", `user/send-otp/${Email}`);
       toast.success("OTP resent successfully!");
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to resend OTP. Please try again.");

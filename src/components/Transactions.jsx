@@ -29,7 +29,7 @@ const UserTransactions = () => {
   if (loading) {
     return <div className="text-center py-8 min-h-screen"><LoadingPage/></div>;
   }
-  if(transactions.length == 0){
+  if(transactions == null || transactions.length == 0){
     return  (
       <div className="h-screen flex flex-col items-center justify-center text-gray-600 text-lg font-semibold">
         No transactions found.

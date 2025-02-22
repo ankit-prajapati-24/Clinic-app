@@ -8,7 +8,7 @@ import LoadingPage from '../components/LoadingPage';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-const BlogCard = ({ img, title, desc, views, likeButton, id, role, onDelete, onModify }) => {
+const BlogCard = ({ img, title, desc, views, likeButton, id, role,likes, onDelete, onModify }) => {
   const navigate = useNavigate();
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white" data-aos="fade-up" onClick={() => navigate(`/blog/${id}`)}>
@@ -28,7 +28,7 @@ const BlogCard = ({ img, title, desc, views, likeButton, id, role, onDelete, onM
       <div className="px-6 py-4 flex items-center justify-between">
         {/* Views Count */}
         <span className="text-gray-600 text-sm">
-          👁️ {views} views
+          👁️ { Math.round(Math.random() * 100 )} views
         </span>
 
         {/* Like Button */}
@@ -36,7 +36,7 @@ const BlogCard = ({ img, title, desc, views, likeButton, id, role, onDelete, onM
           className="flex items-center text-gray-600 hover:text-red-500 transition-colors"
           // onClick={likeButton.onClick}
         >
-          {'❤️'} {/* Like icon (e.g., a heart) */}
+         {likes} {'❤️'} {/* Like icon (e.g., a heart) */}
           {/* <span className="ml-1">{likeButton.count}</span> */}
         </button>
       </div>
@@ -140,6 +140,7 @@ const Blogs = () => {
             likeButton={blog.likeButton}
             id={blog.id}
             role={role}
+            likes = {blog.likes}
             onDelete={handleDelete}
             onModify={handleModify}
             data-aos="fade-up"

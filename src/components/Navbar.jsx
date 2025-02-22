@@ -23,6 +23,10 @@ function NavBar() {
     // alert("Logout ");
     navigate("/login");
   }
+  function handleProfile(){
+    // alert("Logout ");
+    navigate(`/Profile/${token}`);
+  }
   // Close dropdown if clicked outside
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -111,15 +115,29 @@ function NavBar() {
                 {/* User Dropdown */}
                 <div className="relative" ref={userMenuRef}>
                   <div
-                    className="cursor-pointer rounded-full p-2 border bg-sky-500 text-white"
+                    className="cursor-pointer rounded-full   text-white"
                     onClick={toggleDropdown}
                   >
-                    { (token && token.substr(0,2))|| "An"}
+                    {/* { (token && token.substr(0,2))|| "An"} */}
+                    <img src="https://th.bing.com/th/id/OIP.tvaMwK3QuFxhTYg4PSNNVAHaHa?rs=1&pid=ImgDetMain" className="h-12 w-12 rounded-full"/>
                   </div>
 
                   {/* Dropdown Menu */}
                   {dropdownOpen && (
+                  <>
+           
                     <div className="absolute right-0 mt-2 w-36 bg-white border rounded-md shadow-md p-2">
+                    <button
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => {
+                          // console.log("Logging out...");
+                          handleProfile();
+                          
+                          // Implement logout logic here
+                        }}
+                      >
+                        Profile
+                      </button>
                       <button
                         className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         onClick={() => {
@@ -132,6 +150,7 @@ function NavBar() {
                         Logout
                       </button>
                     </div>
+                  </>
                   )}
                 </div>
               </>
