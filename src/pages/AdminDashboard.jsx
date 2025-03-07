@@ -87,7 +87,7 @@ const AdminDashboard = () => {
   if (loading) return <LoadingPage />;
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen max-w-screen-lg mx-auto px-4 sm:px-6">
+    <div className="p-6 bg-gray-100 min-h-screen w-full mx-auto px-4 sm:px-6">
   {/* Admin Header */}
   <div
     className="bg-gradient-to-r w-full from-sky-600 to-sky-700 py-10 text-center text-white shadow-lg rounded-lg flex flex-col md:flex-row items-center"
