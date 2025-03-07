@@ -78,7 +78,7 @@ const ServicePage = () => {
     return <LoadingPage/>
   }
   return (
-    <div className="font-sans bg-gray-50 py-12">
+    <div className="font-sans bg-gray-50 py-12 bg-gradient-to-br from-sky-200 to-white">
       {/* Page Header */}
       <div className="text-center mb-12" data-aos="fade-up">
         <h1 className="text-4xl font-bold text-blue-900">Our Services</h1>
@@ -91,7 +91,7 @@ const ServicePage = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
+              className="bg-gradient-to-br from-sky-200 to-white rounded-lg shadow-md overflow-hidden"
               data-aos="fade-up"
               data-aos-delay={index * 100} // Staggered delay for each card
             >

@@ -25,7 +25,6 @@ const Blog = () => {
         }
 
         const data = await response.json();
-        data.views =  Math.round(Math.random() * 100 );
         setBlog(data);
 
         // Update toast to success
@@ -66,7 +65,7 @@ const Blog = () => {
 
   // Render blog details
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6  min-h-screen">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
         {/* Blog Image */}
         <img
@@ -89,7 +88,7 @@ const Blog = () => {
           </div>
           <div className="flex items-center">
             <span className="mr-2">👁️</span>
-            <span>{blog.views || Math.round(Math.random() * 100 )} Views</span>
+            <span>{blog.views} Views</span>
           </div>
         </div>
       </div>

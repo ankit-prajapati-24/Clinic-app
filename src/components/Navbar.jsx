@@ -20,12 +20,8 @@ function NavBar() {
   function handleLogout(){
     dispatch(setToken(null));
     dispatch(setRole(null));
-    // alert("Logout ");
+    alert("Logout ");
     navigate("/login");
-  }
-  function handleProfile(){
-    // alert("Logout ");
-    navigate(`/Profile/${token}`);
   }
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -42,8 +38,8 @@ function NavBar() {
 
   return (
     <>
-      <nav className="navbar">
-        <div className="nav-container">
+      <nav className="navbar ">
+        <div className="nav-container ">
           <NavLink exact to="/" className="nav-logo">
             <img
               src={logo}
@@ -113,31 +109,17 @@ function NavBar() {
                 </li>
 
                 {/* User Dropdown */}
-                <div className="relative" ref={userMenuRef}>
-                  <div
-                    className="cursor-pointer rounded-full text-white  mx-auto  flex items-center  justify-center"
+                <div className="relative mx-auto mb-2" ref={userMenuRef}>
+                  <img
+                    className="cursor-pointer rounded-full h-12 w-12  border bg-sky-500 text-white"
                     onClick={toggleDropdown}
+                   src={`https://ui-avatars.com/api/?name=${token}`}
                   >
-                    {/* { (token && token.substr(0,2))|| "An"} */}
-                    <img src="https://th.bing.com/th/id/OIP.tvaMwK3QuFxhTYg4PSNNVAHaHa?rs=1&pid=ImgDetMain" className="h-12 w-12 rounded-full"/>
-                  </div>
+                  </img>
 
                   {/* Dropdown Menu */}
                   {dropdownOpen && (
-                  <>
-           
                     <div className="absolute right-0 mt-2 w-36 bg-white border rounded-md shadow-md p-2">
-                    <button
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => {
-                          // console.log("Logging out...");
-                          handleProfile();
-                          
-                          // Implement logout logic here
-                        }}
-                      >
-                        Profile
-                      </button>
                       <button
                         className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         onClick={() => {
@@ -150,13 +132,12 @@ function NavBar() {
                         Logout
                       </button>
                     </div>
-                  </>
                   )}
                 </div>
               </>
             ) : (
               <>
-                <li className="nav-item">
+                <li className="nav-item bg-capacity-20">
                   <NavLink
                     exact
                     to="/Login"

@@ -50,7 +50,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div id="contact" className="bg-white py-16">
+    <div id="contact" className="bg-gradient-to-br from-sky-200 to-white py-16 ">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center">
         {/* Contact Form and Information */}
         <div className="w-full md:w-1/2 md:pr-8">
@@ -140,7 +140,7 @@ const ContactUs = () => {
             <h3 className="text-xl font-bold text-sky-700 mb-4">Our Contact Info</h3>
             <ul className="space-y-2">
               <li className="text-gray-600">
-                <span className="font-semibold">Email:</span> info@digitaltokensystem.com
+                <span className="font-semibold">Email:</span> nfo@shifaclinic.com
               </li>
               <li className="text-gray-600">
                 <span className="font-semibold">Phone:</span> +1 (123) 456-7890

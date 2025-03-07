@@ -78,9 +78,9 @@ function Login() {
   };
 
   return (
-    <div className="flex h-screen from-sky-400 to-blue-500">
+    <div className="flex h-screen bg-gradient-to-br from-sky-200 to-white">
       {/* Left Section - Doctor Model Image */}
-      <div className="w-1/2 hidden items-center justify-center p-8 md:flex">
+      <div className="w-1/2 hidden items-center justify-center p-8 md:flex ">
         <img src={namsastemodel} alt="Doctor Model" className="rounded-lg" />
       </div>
 

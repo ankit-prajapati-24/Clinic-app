@@ -31,7 +31,7 @@ const KeyOfferingsPage = () => {
   ];
 
   return (
-    <div id="key-offerings" className="bg-gradient-to-r from-sky-50 to-blue-50 py-16">
+    <div id="key-offerings" className="bg-gradient-to-br from-white to-sky-200 py-16">
       <div className="max-w-6xl mx-auto px-4">
         {/* Page Header */}
         <div className="text-center mb-12" data-aos="fade-up">

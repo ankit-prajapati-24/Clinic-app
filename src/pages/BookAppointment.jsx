@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const defaultSlots = ["10:00 AM", "12:30 PM", "3:00 PM", "5:00 PM"];
   // UPI link for ₹200 payment to your UPI ID
-  const upiPaymentLink = "upi://pay?pa=9959907317@ybl&pn=Shifa-clinic&am=200&cu=INR";
+  const upiPaymentLink = "upi://pay?pa=ankitjgj3@ybl&pn=Ankit&am=200&cu=INR";
 const BookAppointment = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ const BookAppointment = () => {
       const response = await axios.get(`https://clinic-639l.onrender.com/availability/${newDate.toISOString()}`);
       setAvailability(response.data.slots);
     } catch (err) {
-      // setError("Failed to fetch availability. Please try again.");
+      setError("Failed to fetch availability. Please try again.");
       setAvailability(defaultSlots);
     }
   };
@@ -85,17 +85,6 @@ const BookAppointment = () => {
 
   const handleTransactionChange = (e) => {
     setTransactionId(e.target.value);
-    const value = e.target.value;
-     // Validation Logic
-  if (!value) {
-    setError("Transaction ID is required");
-  } else if (value.length < 8) {
-    setError("Transaction ID must be at least 8 characters");
-  } else if (!/^[a-zA-Z0-9]+$/.test(value)) {
-    setError("Transaction ID must be alphanumeric");
-  } else {
-    setError(""); // No errors
-  }
   };
 
   const handleBookingSubmit = async () => {
@@ -115,7 +104,7 @@ const BookAppointment = () => {
       notes: userDetails.notes,
       address: userDetails.address,
       service: userDetails.service || service.name,
-      status: "Pending",
+      status: "pending",
     //   date: date.toISOString(),
       slot: `${selectedSlot} ${date.toDateString()}`,
     };
@@ -159,12 +148,7 @@ const BookAppointment = () => {
        <h2 className="text-xl font-semibold text-gray-800 mb-4">Select a Date and Time</h2>
         <p className="text-gray-600 mb-4">India Standard Time (IST)</p>
 
-           <Calendar 
-        onChange={handleDateChange} 
-        value={date} 
-        minDate={new Date()} // Restricts past dates
-        tileDisabled={({ date }) => date.getDay() === 0 || date.getDay() === 6} // Disables Saturdays & Sundays  
-      />
+        <Calendar onChange={handleDateChange} value={date} />
        </div>
 
         <div className="mt-6 ml-6">
@@ -192,27 +176,24 @@ const BookAppointment = () => {
       {selectedSlot && (
         <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold text-gray-800">Scan & Pay</h3>
-          <QRCodeCanvas value={`upi://pay?pa=9959907317@ybl&pn=Shifa-clinic&am=${service.price}&cu=INR`} size={200}  className="mx-auto"/>
+          <QRCodeCanvas value={upiPaymentLink} size={200}  className="mx-auto"/>
 
           <p className="text-gray-600">Scan this QR code to make the payment.</p>
         </div>
       )}
 
       {selectedSlot && (
-      <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
-        <h3 className="text-lg font-semibold text-gray-800">Enter Transaction ID</h3>
-        <input
-          type="text"
-          placeholder="Transaction ID"
-          value={transactionId}
-          onChange={handleTransactionChange}
-          className={`w-full p-2 border rounded-lg mt-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
-            ${error ? "border-red-500" : "border-gray-300"}`}
-        />
-        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-      </div>
-    )}
-
+        <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-lg font-semibold text-gray-800">Enter Transaction ID</h3>
+          <input
+            type="text"
+            placeholder="Transaction ID"
+            value={transactionId}
+            onChange={handleTransactionChange}
+            className="w-full p-2 border rounded-lg mt-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+      )}
 
       <PatientDetailsForm
         userDetails={userDetails}
@@ -259,18 +240,15 @@ const PatientDetailsForm = ({ userDetails, handleInputChange }) => (
       className="w-full p-2 border rounded-lg mt-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
     />
 
-<select
-  name="gender"
-  value={userDetails.gender}
-  onChange={handleInputChange}
-  className="w-full p-2 border rounded-lg mt-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
->
-  <option value="">Select Gender</option>
-  <option value="Male">Male</option>
-  <option value="Female">Female</option>
-  <option value="Other">Other</option>
-</select>
-
+    <input
+      type="text"
+      name="gender"
+      placeholder="gender"
+      value={userDetails.gender}
+      onChange={handleInputChange}
+      className="w-full p-2 border rounded-lg mt-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      // readOnly
+    />
     <input
       type="text"
       name="address"

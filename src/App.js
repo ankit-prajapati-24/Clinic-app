@@ -24,7 +24,6 @@ import AdminDashboard from './pages/AdminDashboard';
 import Blog from './components/BlogCard';
 import Chatbot from './services/Chatbot';
 import ModifyBlog from './components/ModifyBlog.jsx';
-import ProfilePage from './Auth/Profile.jsx';
 function App() {
   return (
     <div className='w-screen border  m-0'>
@@ -51,7 +50,6 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/confirm-booking" element={<ConfirmBooking />} />
-        <Route path="/Profile/:gmail" element={<ProfilePage />} />
         {/* <Route path="/Chatbot " element={<Chatbot />} /> */}
       </Routes>
       <Footer />

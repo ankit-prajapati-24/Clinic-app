@@ -6,7 +6,7 @@ import OurTeam from './OurTeam';
 
 const Home = () => {
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto ">
      <HeroSection></HeroSection>
      <KeyOfferingsPage></KeyOfferingsPage>
      <OurTeam></OurTeam>

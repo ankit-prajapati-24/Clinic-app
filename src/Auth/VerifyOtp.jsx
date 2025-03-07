@@ -13,7 +13,7 @@ const VerifyOtp = () => {
   const navigate = useNavigate();
 
   const userform = useSelector((state) => state.User.SignData);
-  const { Password, Email,Name } = userform;
+  const { Password, Email } = userform;
 
   const handleVerifyAndSignup = async (event) => {
     event.preventDefault();
@@ -28,9 +28,10 @@ const VerifyOtp = () => {
         ref.current.continuousStart(); // Start the loading animation
       }
       const res = await apiConnecter("POST", "user/verify-otp",{
-        "name":Name,
+        "name":"",
         "gmail": Email,
         "password": Password,
+        "name": null,
         "mobile": null,
         "history": [],
         "services": [],
@@ -54,11 +55,10 @@ const VerifyOtp = () => {
     }
   };
 
-
   const handleResendOtp = async () => {
     setIsLoading(true);
     try {
-      await apiConnecter("POST", `user/send-otp/${Email}`);
+      await apiConnecter("POST", "Auth/ResendOtp", { Email });
       toast.success("OTP resent successfully!");
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to resend OTP. Please try again.");
@@ -69,7 +69,7 @@ const VerifyOtp = () => {
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center bg-gray-100">
+    <div className="flex h-screen flex-col items-center justify-center bg-gradient-to-br from-sky-200 to-white">
       {/* <LoadingBar color="red" ref={ref} /> */}
       <Toaster />
 
@@ -99,7 +99,7 @@ const VerifyOtp = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-yellow-500 py-3 px-4 hover:scale-95 rounded-md border border-black max-w-[200px] mt-6 font-medium text-richblack-900 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-sky-500 text-white py-3 px-4 hover:scale-95 rounded-md border border-black max-w-[200px] mt-6 font-medium text-richblack-900 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? "Verifying..." : "Verify Email"}
           </button>

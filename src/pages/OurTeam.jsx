@@ -42,7 +42,7 @@ const OurTeam = () => {
   
 
   return (
-    <div className="bg-gray-50 py-16">
+    <div className="bg-gray-50 py-16 bg-gradient-to-br from-sky-200 to-white">
       <div className="max-w-6xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12" data-aos="fade-up">

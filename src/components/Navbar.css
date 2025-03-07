@@ -1,6 +1,5 @@
 /* Navbar */
 .navbar {
-  
     background-color: #179ee7;  /* Grayish-green background */
     height: 80px;
     display: flex;
@@ -15,7 +14,6 @@
   
   /* Navbar Container */
   .nav-container {
-    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,7 +47,6 @@
   
   /* Navbar Menu */
   .nav-menu {
-    
     display: flex;
     list-style: none;
     text-align: center;
@@ -113,8 +110,9 @@
       width: 100%;
       border-top: 1px solid #fff; /* White border */
       position: absolute;
-      backdrop-filter: blur(10px);
-      background-color: rgba(26, 119, 177, 0.516);
+      backdrop-filter: blue(30px);
+      /* backdrop-filter: blur(10px); */
+      background-color: rgb(17, 148, 230);
       /* background-color: transparent; */
       /* filter:blur(1px); */
       top: 80px;
@@ -133,7 +131,7 @@
     }
   
     .nav-item .active {
-      color: #179ee7;
+      color: white;
       border: none;
     }
   
