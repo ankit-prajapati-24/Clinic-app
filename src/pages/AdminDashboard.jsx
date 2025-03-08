@@ -97,7 +97,7 @@ const AdminDashboard = () => {
     <div className="flex flex-col items-center p-5 md:ml-3" data-aos="fade-right">
       <img
         className="h-24 w-24 sm:h-32 sm:w-32 rounded-full object-cover"
-        src={`https://ui-avatars.com/api/?name=${admin.name}`}
+        src={`https://ui-avatars.com/api/?name=${admin.name || admin.username}`}
         alt={admin.name}
       />
       <h2 className="mt-4 text-xl sm:text-2xl font-semibold text-gray-900">{admin.name}</h2>
@@ -105,7 +105,7 @@ const AdminDashboard = () => {
       <div className="mt-4 w-full space-y-2">
         <div className="flex items-center text-gray-200 text-sm">
           <Mail className="h-5 w-5 mr-2" />
-          <span>{admin.gmail}</span>
+          <span>{admin.gmail || "Admin@gmail.com"}</span>
         </div>
         <div className="flex items-center text-gray-200 text-sm">
           <Phone className="h-5 w-5 mr-2" />
@@ -119,7 +119,7 @@ const AdminDashboard = () => {
     </div>
     
     {/* Dashboard Heading */}
-    <div className="flex flex-col items-center md:items-start justify-center w-full mt-4 md:mt-0" data-aos="zoom-in">
+    <div className="flex flex-col items-center md:items-center justify-center  w-full mt-4 md:mt-0" data-aos="zoom-in">
       <h1 className="text-2xl sm:text-4xl font-bold">Admin Dashboard</h1>
       <p className="text-md sm:text-lg">Manage Users, Transactions & Services</p>
     </div>

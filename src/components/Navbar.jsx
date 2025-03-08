@@ -18,9 +18,9 @@ function NavBar() {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   
   function handleLogout(){
-    dispatch(setToken(null));
-    dispatch(setRole(null));
-    alert("Logout ");
+    dispatch(setToken(""));
+    dispatch(setRole(""));
+    // alert("Logout ");
     navigate("/login");
   }
   // Close dropdown if clicked outside
@@ -95,7 +95,7 @@ function NavBar() {
               </NavLink>
             </li>
 
-            {token ? (
+            {token  ? (
               <>
                 <li className="nav-item">
                   <NavLink
@@ -163,7 +163,7 @@ function NavBar() {
 
           {/* Hamburger Menu for Mobile */}
           <div
-            className="md:hidden fixed top-5 right-4 bg-sky-500 text-white p-2 rounded-lg z-50"
+            className="md:hidden fixed top-8 right-4 bg-sky-500 text-white p-2 rounded-lg z-50"
             onClick={handleClick}
           >
             {click ? <HamburgetMenuOpen /> : <HamburgetMenuClose />}

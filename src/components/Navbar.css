@@ -1,7 +1,7 @@
 /* Navbar */
 .navbar {
     background-color: #179ee7;  /* Grayish-green background */
-    height: 80px;
+    height: 100px;
     display: flex;
     width: 100wh;
     justify-content: center;

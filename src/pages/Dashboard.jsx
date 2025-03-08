@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Mail, Phone, MapPin, FileText, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Loader2 } from 'lucide-react';
 import UserTransactions from '../components/Transactions';
 import { apiConnecter } from '../services/apiconnecter';
 import { useSelector } from 'react-redux';
@@ -19,15 +19,14 @@ function Dashboard() {
       try {
         const response = await apiConnecter('GET', `user/data/${token}`);
         const data = await response.data;
-        const CompleteAppointment = data.history.reduce((count, item) =>
-          item.status === "Accepted" ? count + 1 : count, 0
-        );
+        const completeAppointments = data.history.filter(item => item.status === "Accepted").length;
 
         setUser({
-          ...data, stats: [
+          ...data,
+          stats: [
             { label: "Appointments", value: data.history.length },
-            { label: "Pending", value: data.history.length - CompleteAppointment },
-            { label: "Completed", value: CompleteAppointment }
+            { label: "Pending", value: data.history.length - completeAppointments },
+            { label: "Completed", value: completeAppointments }
           ],
         });
       } catch (err) {
@@ -60,78 +59,64 @@ function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-200 to-white py-8 px-4">
-      <div className="bg-gradient-to-r from-sky-600 to-sky-700 py-16 text-center text-white shadow-lg rounded-lg flex" data-aos="fade-up">
-        <div className="flex flex-col items-center p-5 ml-3">
-          <img className="h-32 w-32 rounded-full object-cover" src={`https://ui-avatars.com/api/?name=${user.name}`} alt={user.name} />
-          <h2 className="mt-4 text-2xl font-semibold text-gray-900">
-           {user.name}
-          </h2>
-          <p className="text-sm text-gray-500">{user.role}</p>
-          <div className="mt-4 w-full space-y-3">
-            <div className="flex items-center text-gray-200">
-              <Mail className="h-5 w-5 mr-2" />
-              <span className="text-sm">{user.gmail}</span>
-            </div>
-            <div className="flex items-center text-gray-200">
-              <Phone className="h-5 w-5 mr-2" />
-              <span className="text-sm">{user.mobile || "91XXXXXXXXXX"}</span>
-            </div>
-            <div className="flex items-center text-gray-200">
-              <MapPin className="h-5 w-5 mr-2" />
-              <span className="text-sm">{user.location || "City Country"}</span>
-            </div>
+    <div className="min-h-screen w-full bg-gradient-to-br from-sky-200 to-white py-8 px-4">
+      <div className="bg-gradient-to-r from-sky-600 to-sky-700 py-10 text-center text-white shadow-lg rounded-lg flex flex-col md:flex-row items-center md:items-center" data-aos="fade-up">
+        <div className="flex flex-col items-center ml-6 p-5">
+          <img className="h-24 w-24 md:h-32 md:w-32 rounded-full object-cover" src={`https://ui-avatars.com/api/?name=${user.name || user.gmail}`} alt={user.name} />
+          <h2 className="mt-4 text-xl md:text-2xl font-semibold text-gray-900">{user.name}</h2>
+          <p className="text-sm text-gray-200">{user.role}</p>
+          <div className="mt-4 space-y-2 text-gray-300 text-sm">
+            <div className="flex items-center"><Mail className="h-5 w-5 mr-2" /> {user.gmail}</div>
+            <div className="flex items-center"><Phone className="h-5 w-5 mr-2" /> {user.mobile || "91XXXXXXXXXX"}</div>
+            <div className="flex items-center"><MapPin className="h-5 w-5 mr-2" /> {user.location || "City, Country"}</div>
           </div>
         </div>
-        <div className="flex item-center justify-center flex-col w-full">
-          <h1 className="text-4xl font-bold">User Dashboard</h1>
-          <p className="text-lg">Manage Report, Transactions & history</p>
+        <div className="text-center md:text-left md:ml-8  flex-grow flex flex-col  items-center justify-center w-full">
+          <h1 className="text-3xl md:text-4xl font-bold">User Dashboard</h1>
+          <p className="text-lg">Manage Reports, Transactions & History</p>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow overflow-hidden mt-6" data-aos="zoom-in">
-        <div className="px-4 py-5 sm:p-6">
-          <div className="grid grid-cols-3 gap-4 mt-6">
-            <div className="p-4 bg-blue-500 text-white text-center rounded-lg shadow" data-aos="fade-right">
-              <h3 className="text-lg font-bold">{user.stats[0].label}</h3>
-              <p className="text-2xl">{user.stats[0].value}</p>
-            </div>
-            <div className="p-4 bg-yellow-500 text-white text-center rounded-lg shadow" data-aos="fade-up">
-              <h3 className="text-lg font-bold">{user.stats[1].label}</h3>
-              <p className="text-2xl">{user.stats[1].value}</p>
-            </div>
-            <div className="p-4 bg-green-500 text-white text-center rounded-lg shadow" data-aos="fade-left">
-              <h3 className="text-lg font-bold">{user.stats[2].label}</h3>
-              <p className="text-2xl">{user.stats[2].value}</p>
-            </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6" data-aos="zoom-in">
+        {user.stats.map((stat, index) => (
+          <div key={index} className="p-4 text-white text-center rounded-lg shadow" style={{ backgroundColor: ["#3b82f6", "#facc15", "#22c55e"][index] }}>
+            <h3 className="text-lg font-bold">{stat.label}</h3>
+            <p className="text-2xl">{stat.value}</p>
           </div>
-        </div>
+        ))}
       </div>
 
-      <main className="mx-auto mt-6">
-        <div className="lg:col-span-2 bg-white rounded-lg shadow-lg p-6" data-aos="fade-up">
-          <h3 className="text-lg font-medium text-gray-900">Recent Reports</h3>
-          <div className="space-y-4 mt-4">
-            <div className="flex items-center justify-between p-4 font-bold rounded-lg bg-sky-100">
-              <div>Descriptions</div>
-              <div>Medicines</div>
-              <div>Dates</div>
-            </div>
-            {user.reports ? user.reports.map((report, index) => (
-              <div key={index} className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:bg-gray-50" data-aos="fade-up">
-                <h4 className="text-sm font-medium text-gray-900">{report.description}</h4>
-                <div className="px-3 py-1 text-xs font-medium text-gray-800">{report.medicines}</div>
-                <p className="text-sm text-gray-500">{report.date}</p>
-              </div>
-            )) : <div className=" bg-gradient-to-br from-sky-200 to-white py-8 px-4 flex item-center justify-center">
-                   No Reports Available
-            </div>}
+      <div className="mt-6 bg-white rounded-lg shadow-lg p-6" data-aos="fade-up">
+  <h3 className="text-2xl font-bold text-gray-900">Recent Reports</h3>
+  {user.reports?.length ? (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+      {user.reports.map((report, index) => (
+        <div 
+          key={index} 
+          className="p-4 rounded-lg border border-gray-200 hover:bg-gray-50 flex flex-col space-y-2" 
+          data-aos="fade-up"
+        >
+          <div className="flex flex-col gap-1">
+            <h1 className="font-bold text-gray-700">Desc:</h1>
+            <h4 className="text-sm font-medium text-gray-900">{report.description}</h4>
           </div>
-          <button className="mt-6 w-full bg-sky-600 text-white py-2 px-4 rounded-md hover:bg-sky-700 transition-colors">View All Reports</button>
-        </div>
-      </main>
 
-      <UserTransactions data-aos="fade-up" />
+          <div className="flex flex-col gap-1">
+            <h1 className="font-bold text-gray-700">Medicines:</h1>
+            <h4 className="text-sm font-medium text-gray-900">{report.medicines}</h4>
+          </div>
+
+          <p className="text-sm text-gray-500">{report.date}</p>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div className="text-center text-gray-600 mt-4">No Reports Available</div>
+  )}
+</div>
+
+      <UserTransactions showLabels={true} />
+
     </div>
   );
 }

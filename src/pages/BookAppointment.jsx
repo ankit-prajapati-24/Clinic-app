@@ -80,6 +80,7 @@ const BookAppointment = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
     setUserDetails((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -92,7 +93,14 @@ const BookAppointment = () => {
       toast.error("Please select a slot and enter a valid transaction ID.");
       return;
     }
-
+  
+    // UPI Merchant Payment (PhonePe) Transaction ID Validation
+    const transactionRegex = /^T[0-9A-Za-z_-]{10,30}$/;
+    if (!transactionRegex.test(transactionId)) {
+      toast.error("Invalid UPI Transaction ID. Please enter the correct PhonePe transaction ID.");
+      return;
+    }
+  
     const bookingData = {
       transactionId,
       name: userDetails.name || "Self",
@@ -104,25 +112,26 @@ const BookAppointment = () => {
       notes: userDetails.notes,
       address: userDetails.address,
       service: userDetails.service || service.name,
-      status: "pending",
-    //   date: date.toISOString(),
+      status: "Pending",
       slot: `${selectedSlot} ${date.toDateString()}`,
     };
-
+  
+    if (bookingData.age > 100) {
+      toast.error("Please enter a valid age.");
+      return;
+    }
+  
+    if (bookingData.mobile.length !== 10) {
+      toast.error("Please enter a valid mobile number.");
+      return;
+    }
+  
     setIsSubmitting(true);
     navigate("/confirm-booking", {
       state: { bookingData }, // Pass data as state
     });
-    // try {
-    //   await apiConnecter("POST","user/transaction/add",bookingData);
-    //   toast.success("Appointment booked successfully!");
-      // navigate("/Dashboard");
-    // } catch (err) {
-    //   toast.error("Failed to book appointment. Please try again.");
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
   };
+  
 
   if (loading) {
     return <LoadingPage/>
@@ -236,19 +245,23 @@ const PatientDetailsForm = ({ userDetails, handleInputChange }) => (
       name="age"
       placeholder="Age"
       value={userDetails.age}
+      required
       onChange={handleInputChange}
       className="w-full p-2 border rounded-lg mt-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
     />
 
-    <input
-      type="text"
-      name="gender"
-      placeholder="gender"
-      value={userDetails.gender}
-      onChange={handleInputChange}
-      className="w-full p-2 border rounded-lg mt-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-      // readOnly
-    />
+<select
+        name="gender"
+        value={userDetails.gender}
+        onChange={handleInputChange}
+        className="w-full p-2 border rounded-lg mt-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      >
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+
     <input
       type="text"
       name="address"

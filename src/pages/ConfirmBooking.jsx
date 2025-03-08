@@ -8,9 +8,11 @@ const ConfirmBooking = () => {
   const bookingData = location.state?.bookingData || {};
   const navigate = useNavigate();
   const bookingHandler = async() =>{ 
+    const toastid = toast.loading("Booking.....");
     try {
       var res = await apiConnecter("POST","user/transaction/add",bookingData);
       console.log(res);
+      toast.dismiss(toastid);
       if(res.data.rc == '00'){
         toast.success("Appointment booked successfully!");
         navigate("/Dashboard");
@@ -21,6 +23,7 @@ const ConfirmBooking = () => {
       }
       
     } catch (err) {
+      toast.dismiss(toastid);
       toast.error("Something went wrong");
       navigate("/Dashboard");
     } finally {
