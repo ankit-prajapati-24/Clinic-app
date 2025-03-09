@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const defaultSlots = ["10:00 AM", "12:30 PM", "3:00 PM", "5:00 PM"];
   // UPI link for ₹200 payment to your UPI ID
-  const upiPaymentLink = "upi://pay?pa=ankitjgj3@ybl&pn=Ankit&am=200&cu=INR";
+  // const upiPaymentLink = `upi://pay?pa=ankitjgj3@ybl&pn=Ankit&am=200&cu=INR`;
 const BookAppointment = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -185,7 +185,7 @@ const BookAppointment = () => {
       {selectedSlot && (
         <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold text-gray-800">Scan & Pay</h3>
-          <QRCodeCanvas value={upiPaymentLink} size={200}  className="mx-auto"/>
+          <QRCodeCanvas value={`upi://pay?pa=9959907317@ybl&pn=Shifa-clinic&am=${service.price}&cu=INR`} size={200}  className="mx-auto"/>
 
           <p className="text-gray-600">Scan this QR code to make the payment.</p>
         </div>

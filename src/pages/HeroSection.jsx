@@ -12,7 +12,7 @@ const HeroSection = () => {
   }
 
   return (
-    <div className=" bg-gradient-to-br from-sky-200 to-white mx-auto px-4 py-16 flex flex-row md:flex-row items-center">
+    <div className=" bg-gradient-to-br from-blue-200 to-white mx-auto px-4 py-16 flex flex-row md:flex-row items-center">
       {/* Text Content */}
       <div className="w-full md:w-1/2 pr-8 mb-8 md:mb-0" data-aos="fade-right">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-sky-700 mb-6">

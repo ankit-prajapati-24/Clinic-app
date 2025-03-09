@@ -88,63 +88,64 @@ const AdminDashboard = () => {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen w-full mx-auto px-4 sm:px-6">
-  {/* Admin Header */}
-  <div
-    className="bg-gradient-to-r w-full from-sky-600 to-sky-700 py-10 text-center text-white shadow-lg rounded-lg flex flex-col md:flex-row items-center"
-    data-aos="fade-down"
-  >
-    {/* Admin Info */}
-    <div className="flex flex-col items-center p-5 md:ml-3" data-aos="fade-right">
-      <img
-        className="h-24 w-24 sm:h-32 sm:w-32 rounded-full object-cover"
-        src={`https://ui-avatars.com/api/?name=${admin.name || admin.username}`}
-        alt={admin.name}
-      />
-      <h2 className="mt-4 text-xl sm:text-2xl font-semibold text-gray-900">{admin.name}</h2>
-      <p className="text-sm text-gray-500">{admin.role}</p>
-      <div className="mt-4 w-full space-y-2">
-        <div className="flex items-center text-gray-200 text-sm">
-          <Mail className="h-5 w-5 mr-2" />
-          <span>{admin.gmail || "Admin@gmail.com"}</span>
+      {/* Admin Header */}
+      <div
+        className="bg-gradient-to-r w-full from-sky-600 to-sky-700 py-10 text-center text-white shadow-lg rounded-lg flex flex-col md:flex-row items-center"
+        data-aos="fade-down"
+      >
+        {/* Admin Info */}
+        <div className="flex flex-col items-center p-5 md:ml-3" data-aos="fade-right">
+          <img
+            className="h-24 w-24 sm:h-32 sm:w-32 rounded-full object-cover"
+            src={`https://ui-avatars.com/api/?name=${admin.name || admin.username}`}
+            alt={admin.name}
+          />
+          <h2 className="mt-4 text-xl sm:text-2xl font-semibold text-gray-900">{admin.name}</h2>
+          <p className="text-sm text-gray-500">{admin.role}</p>
+          <div className="mt-4 w-full space-y-2">
+            <div className="flex items-center text-gray-200 text-sm">
+              <Mail className="h-5 w-5 mr-2" />
+              <span>{admin.gmail || "Admin@gmail.com"}</span>
+            </div>
+            <div className="flex items-center text-gray-200 text-sm">
+              <Phone className="h-5 w-5 mr-2" />
+              <span>{admin.mobile || "91XXXXXXXXXX"}</span>
+            </div>
+            <div className="flex items-center text-gray-200 text-sm">
+              <MapPin className="h-5 w-5 mr-2" />
+              <span>{admin.location || "City Country"}</span>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center text-gray-200 text-sm">
-          <Phone className="h-5 w-5 mr-2" />
-          <span>{admin.mobile || "91XXXXXXXXXX"}</span>
-        </div>
-        <div className="flex items-center text-gray-200 text-sm">
-          <MapPin className="h-5 w-5 mr-2" />
-          <span>{admin.location || "City Country"}</span>
-        </div>
-      </div>
-    </div>
-    
-    {/* Dashboard Heading */}
-    <div className="flex flex-col items-center md:items-center justify-center  w-full mt-4 md:mt-0" data-aos="zoom-in">
-      <h1 className="text-2xl sm:text-4xl font-bold">Admin Dashboard</h1>
-      <p className="text-md sm:text-lg">Manage Users, Transactions & Services</p>
-    </div>
-  </div>
 
-  {/* Stats Section */}
-  <div className="bg-white rounded-lg shadow overflow-hidden mt-6" data-aos="fade-up">
-    <div className="px-4 py-5 sm:p-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="p-4 bg-blue-500 text-white text-center rounded-lg shadow" data-aos="flip-left">
-          <h3 className="text-lg font-bold">Total Users</h3>
-          <p className="text-2xl">{totalUsers}</p>
-        </div>
-        <div className="p-4 bg-green-500 text-white text-center rounded-lg shadow" data-aos="flip-right">
-          <h3 className="text-lg font-bold">Total Appointments</h3>
-          <p className="text-2xl">{transactions.length}</p>
-        </div>
-        <div className="p-4 bg-red-500 text-white text-center rounded-lg shadow" data-aos="flip-up">
-          <h3 className="text-lg font-bold">Total Services</h3>
-          <p className="text-2xl">{totalService}</p>
+        {/* Dashboard Heading */}
+        <div className="flex flex-col items-center md:items-center justify-center  w-full mt-4 md:mt-0" data-aos="zoom-in">
+          <h1 className="text-2xl sm:text-4xl font-bold">Admin Dashboard</h1>
+          <p className="text-md sm:text-lg">Manage Users, Transactions & Services</p>
         </div>
       </div>
-    </div>
-  </div>
-<RevenueAnalysis revenueData={revenueData} />
+
+      {/* Stats Section */}
+      <div className="bg-white rounded-lg shadow overflow-hidden mt-6" data-aos="fade-up">
+        <div className="px-4 py-5 sm:p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="p-4 bg-blue-500 text-white text-center rounded-lg shadow" data-aos="flip-left">
+              <h3 className="text-lg font-bold">Total Users</h3>
+              <p className="text-2xl">{totalUsers}</p>
+            </div>
+            <div className="p-4 bg-green-500 text-white text-center rounded-lg shadow" data-aos="flip-right">
+              <h3 className="text-lg font-bold">Total Appointments</h3>
+              <p className="text-2xl">{transactions.length}</p>
+            </div>
+            <div className="p-4 bg-red-500 text-white text-center rounded-lg shadow" data-aos="flip-up">
+              <h3 className="text-lg font-bold">Total Services</h3>
+              <p className="text-2xl">{totalService}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <RevenueAnalysis revenueData={revenueData} />
+      
       <TransactionTable
         filteredTransactions={filteredTransactions}
         searchTerm={searchTerm}
@@ -160,8 +161,8 @@ const AdminDashboard = () => {
           }
         }}
       />
-  <ContactMessages />
-</div>
+      <ContactMessages />
+    </div>
 
   );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Services from './pages/Services';
-import Team from './pages/Team';
+
 import Blogs from './pages/Blog';
 import Contact from './pages/Contact';
 import Header from './components/Header';
@@ -36,7 +36,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/team" element={<Team />} />
+
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/ContactUs" element={<Contact />} />
         <Route path="/TheClinic" element={<TheClinic />} />
